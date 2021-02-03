@@ -1,360 +1,186 @@
 module.exports = {
-  abi: [
-    {
-      inputs: [],
-      name: "countLabReports",
-      outputs: [
+    filterAbi: [
         {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
+            "anonymous": false,
+            "inputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint16",
+                            "name": "roomNo",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "temp",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "humidity",
+                            "type": "uint16"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct DataQualityContract.RoomStreamEvent",
+                    "name": "streamEvent",
+                    "type": "tuple"
+                }
+            ],
+            "name": "LogRoomStreamEvent",
+            "type": "event"
         },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "countPersons",
-      outputs: [
         {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
+            "inputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "roomNo",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "temp",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "humidity",
+                            "type": "string"
+                        }
+                    ],
+                    "internalType": "struct DataQualityContract.RoomStreamEventDTO",
+                    "name": "incomingRoomStreamEventDTO",
+                    "type": "tuple"
+                }
+            ],
+            "name": "process",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
         },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "countPrescriptionReports",
-      outputs: [
         {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
+            "inputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "roomNo",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "temp",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "humidity",
+                            "type": "string"
+                        }
+                    ],
+                    "internalType": "struct DataQualityContract.RoomStreamEventDTO",
+                    "name": "incomingRoomStreamEvent",
+                    "type": "tuple"
+                }
+            ],
+            "name": "processFilter",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
         },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
         {
-          internalType: "uint256",
-          name: "id",
-          type: "uint256",
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "AlertStreamEvents",
+            "outputs": [
+                {
+                    "internalType": "uint16",
+                    "name": "roomNo",
+                    "type": "uint16"
+                },
+                {
+                    "internalType": "uint16",
+                    "name": "temp",
+                    "type": "uint16"
+                },
+                {
+                    "internalType": "uint16",
+                    "name": "humidity",
+                    "type": "uint16"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
         },
-      ],
-      name: "getLabReport",
-      outputs: [
         {
-          components: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "string",
-              name: "file",
-              type: "string",
-            },
-            {
-              internalType: "int256",
-              name: "date",
-              type: "int256",
-            },
-            {
-              internalType: "string",
-              name: "hospitleName",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "notes",
-              type: "string",
-            },
-          ],
-          internalType: "struct PatientData.LabReport",
-          name: "",
-          type: "tuple",
+            "inputs": [],
+            "name": "getAlertStreamEvents",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint16",
+                            "name": "roomNo",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "temp",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "humidity",
+                            "type": "uint16"
+                        }
+                    ],
+                    "internalType": "struct DataQualityContract.AlertStreamEvent[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
         },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
         {
-          internalType: "uint256",
-          name: "id",
-          type: "uint256",
-        },
-      ],
-      name: "getPerson",
-      outputs: [
-        {
-          components: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "string",
-              name: "bmi",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "bloodPressure",
-              type: "string",
-            },
-            {
-              internalType: "int256",
-              name: "date",
-              type: "int256",
-            },
-            {
-              internalType: "string",
-              name: "age",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "notes",
-              type: "string",
-            },
-          ],
-          internalType: "struct PatientData.PersonalData",
-          name: "",
-          type: "tuple",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "id",
-          type: "uint256",
-        },
-      ],
-      name: "getPrescriptionReport",
-      outputs: [
-        {
-          components: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "string",
-              name: "file",
-              type: "string",
-            },
-            {
-              internalType: "int256",
-              name: "date",
-              type: "int256",
-            },
-            {
-              internalType: "string",
-              name: "hospitleName",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "notes",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "dname",
-              type: "string",
-            },
-          ],
-          internalType: "struct PatientData.PrescriptionReport",
-          name: "",
-          type: "tuple",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "numOfLabReports",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "numOfPersons",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "numOfPrescriptionReports",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          components: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "string",
-              name: "file",
-              type: "string",
-            },
-            {
-              internalType: "int256",
-              name: "date",
-              type: "int256",
-            },
-            {
-              internalType: "string",
-              name: "hospitleName",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "notes",
-              type: "string",
-            },
-          ],
-          internalType: "struct PatientData.LabReport",
-          name: "labReport",
-          type: "tuple",
-        },
-      ],
-      name: "setLabReport",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          components: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "string",
-              name: "bmi",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "bloodPressure",
-              type: "string",
-            },
-            {
-              internalType: "int256",
-              name: "date",
-              type: "int256",
-            },
-            {
-              internalType: "string",
-              name: "age",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "notes",
-              type: "string",
-            },
-          ],
-          internalType: "struct PatientData.PersonalData",
-          name: "personalData",
-          type: "tuple",
-        },
-      ],
-      name: "setPerson",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          components: [
-            {
-              internalType: "uint256",
-              name: "id",
-              type: "uint256",
-            },
-            {
-              internalType: "string",
-              name: "file",
-              type: "string",
-            },
-            {
-              internalType: "int256",
-              name: "date",
-              type: "int256",
-            },
-            {
-              internalType: "string",
-              name: "hospitleName",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "notes",
-              type: "string",
-            },
-            {
-              internalType: "string",
-              name: "dname",
-              type: "string",
-            },
-          ],
-          internalType: "struct PatientData.PrescriptionReport",
-          name: "prescriptionReport",
-          type: "tuple",
-        },
-      ],
-      name: "setPrescriptionReport",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-  ],
+            "inputs": [],
+            "name": "getFirstElement",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint16",
+                            "name": "roomNo",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "temp",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "humidity",
+                            "type": "uint16"
+                        }
+                    ],
+                    "internalType": "struct DataQualityContract.AlertStreamEvent",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    windowAbi: [],
+    patternAbi: [],
+    sequenceAbi: []
 };
