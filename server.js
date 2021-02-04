@@ -43,25 +43,25 @@ const contract_address = "0x242FB920aC7560c0B58F345C51F4529f93B3027D";
 // Filter
 const filter_contract_address = "0xe1358A0d5d926B0b0B109ef67B16ca4e740b4aa3";
 // Window
-const window_contract_address = "0x242FB920aC7560c0B58F345C51F4529f93B3027D";
+const window_contract_address = "0xbAb0666D4B345fC9b578c9661997341E4dad1f21";
 // Pattern
-const pattern_contract_address = "0x242FB920aC7560c0B58F345C51F4529f93B3027D";
+const pattern_contract_address = "0x0FaD30a25aa67895b483b28FA1c024a227799309";
 // Sequence
-const sequence_contract_address = "0x242FB920aC7560c0B58F345C51F4529f93B3027D";
+const sequence_contract_address = "0x91fEe780AF5dc8494ebE2963683989648D90d4Bb";
 
 //account address
-const account = "0x84b32420eBE97802D2727C2e5A6654079fd35744";
+const account = "0xd49ECd1D54e88bABAC333A23EB21Ba0d5F197BFf";
 
 //setting up smart contract initialization from web3
 const DataContract = new web3.eth.Contract(filterAbi, filter_contract_address);
 // Filter
 const FilterContract = new web3.eth.Contract(filterAbi, filter_contract_address);
 // Window
-const WindowContract = new web3.eth.Contract(windowAbi, contract_address);
+const WindowContract = new web3.eth.Contract(windowAbi, window_contract_address);
 // Pattern
-const PatternContract = new web3.eth.Contract(patternAbi, contract_address);
+const PatternContract = new web3.eth.Contract(patternAbi, pattern_contract_address);
 // Sequence
-const SequenceContract = new web3.eth.Contract(sequenceAbi, contract_address);
+const SequenceContract = new web3.eth.Contract(sequenceAbi, sequence_contract_address);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -92,6 +92,72 @@ router.get("/alertStreamEvents/:index", async (req, res) => {
     res.status(200).send({error: false, data: result});
 });
 
+/*
+* Window
+* */
+
+router.post("/process_window", async (req, res) => {
+    const {machineId, weight} = req.body;
+    let result = await WindowContract.methods
+        .process([machineId, weight])
+        .send({from: account, gas: 3000000});
+
+    res.json({error: false, data: result});
+});
+
+router.get("/getAvgWeightStreamEvents", async (req, res) => {
+    let result = await WindowContract.methods.getAvgWeightStreamEvent().call();
+    res.status(200).send({error: false, data: result});
+});
+
+/*
+* Pattern
+* */
+
+router.post("/process_pattern_regulator", async (req, res) => {
+    const {deviceID, roomNo, action} = req.body;
+    let result = await PatternContract.methods
+        .processPatternRegulatorStream([deviceID, roomNo,action])
+        .send({from: account, gas: 3000000});
+
+    res.json({error: false, data: result});
+});
+
+router.post("/process_pattern_temp", async (req, res) => {
+    const {deviceID, roomNo, temp} = req.body;
+    let result = await PatternContract.methods
+        .processPatternTempStream([deviceID, roomNo,temp])
+        .send({from: account, gas: 3000000});
+
+    res.json({error: false, data: result});
+});
+
+router.get("/getPatternAlertStreamEvents", async (req, res) => {
+    let result = await PatternContract.methods.getAlertStreamEvents().call();
+    res.status(200).send({error: false, data: result});
+});
+
+/*
+* Sequence
+* */
+
+router.post("/process_sequence", async (req, res) => {
+    const {packageId, stageId} = req.body;
+    let result = await SequenceContract.methods
+        .processSequence([packageId, stageId])
+        .send({from: account, gas: 3000000});
+
+    res.json({error: false, data: result});
+});
+
+router.get("/getCompleteShipmentStreamEvents", async (req, res) => {
+    let result = await SequenceContract.methods.getCompleteShipmentStreamEvents().call();
+    res.status(200).send({error: false, data: result});
+});
+
+/*
+*
+* */
 router.post("/process", async (req, res) => {
     const {roomNo, temp, humidity} = req.body;
     let result = await DataContract.methods
